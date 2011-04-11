@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="jmock-exp-inheritance" default="all">
+  
+  
+  <property file="jmock-exp-inheritance.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="128m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.sbas/**"/>
+    <exclude name="**/.IJI.*/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/*.lib/**"/>
+    <exclude name="**/*~/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.ear"/>
+    <include name="*.zip"/>
+    <include name="*.swc"/>
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <include name="**/?*.properties"/>
+    <include name="**/?*.xml"/>
+    <include name="**/?*.gif"/>
+    <include name="**/?*.png"/>
+    <include name="**/?*.jpeg"/>
+    <include name="**/?*.jpg"/>
+    <include name="**/?*.html"/>
+    <include name="**/?*.dtd"/>
+    <include name="**/?*.tld"/>
+    <include name="**/?*.ftl"/>
+  </patternset>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.jmockit.classpath">
+    <pathelement location="${basedir}/lib/jmockit/jmockit.jar"/>
+  </path>
+  
+  <path id="library.testng.classpath">
+    <pathelement location="${basedir}/lib/testng/testng-6.0.jar"/>
+  </path>
+  
+  
+  <!-- Global Libraries -->
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module jmock-exp-inheritance -->
+  
+  <dirname property="module.jmock-exp-inheritance.basedir" file="${ant.file}"/>
+  
+  
+  
+  <property name="compiler.args.jmock-exp-inheritance" value="${compiler.args}"/>
+  
+  <property name="jmock-exp-inheritance.output.dir" value="${module.jmock-exp-inheritance.basedir}/out/production/jmock-exp-inheritance"/>
+  <property name="jmock-exp-inheritance.testoutput.dir" value="${module.jmock-exp-inheritance.basedir}/out/test/jmock-exp-inheritance"/>
+  
+  <path id="jmock-exp-inheritance.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="jmock-exp-inheritance.module.production.classpath">
+    <path refid="library.testng.classpath"/>
+    <path refid="library.jmockit.classpath"/>
+  </path>
+  
+  <path id="jmock-exp-inheritance.runtime.production.module.classpath">
+    <pathelement location="${jmock-exp-inheritance.output.dir}"/>
+    <path refid="library.testng.classpath"/>
+    <path refid="library.jmockit.classpath"/>
+  </path>
+  
+  <path id="jmock-exp-inheritance.module.classpath">
+    <pathelement location="${jmock-exp-inheritance.output.dir}"/>
+    <path refid="library.testng.classpath"/>
+    <path refid="library.jmockit.classpath"/>
+  </path>
+  
+  <path id="jmock-exp-inheritance.runtime.module.classpath">
+    <pathelement location="${jmock-exp-inheritance.testoutput.dir}"/>
+    <pathelement location="${jmock-exp-inheritance.output.dir}"/>
+    <path refid="library.testng.classpath"/>
+    <path refid="library.jmockit.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.jmock-exp-inheritance">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.jmock-exp-inheritance">
+    <patternset refid="excluded.from.module.jmock-exp-inheritance"/>
+  </patternset>
+  
+  <path id="jmock-exp-inheritance.module.sourcepath">
+    <dirset dir="${module.jmock-exp-inheritance.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.jmock-exp-inheritance" depends="compile.module.jmock-exp-inheritance.production,compile.module.jmock-exp-inheritance.tests" description="Compile module jmock-exp-inheritance"/>
+  
+  <target name="compile.module.jmock-exp-inheritance.production" description="Compile module jmock-exp-inheritance; production classes">
+    <mkdir dir="${jmock-exp-inheritance.output.dir}"/>
+    <javac destdir="${jmock-exp-inheritance.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
+      <compilerarg line="${compiler.args.jmock-exp-inheritance}"/>
+      <bootclasspath refid="jmock-exp-inheritance.module.bootclasspath"/>
+      <classpath refid="jmock-exp-inheritance.module.production.classpath"/>
+      <src refid="jmock-exp-inheritance.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.jmock-exp-inheritance"/>
+    </javac>
+    
+    <copy todir="${jmock-exp-inheritance.output.dir}">
+      <fileset dir="${module.jmock-exp-inheritance.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.jmock-exp-inheritance.tests" depends="compile.module.jmock-exp-inheritance.production" description="compile module jmock-exp-inheritance; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.jmock-exp-inheritance" description="cleanup module">
+    <delete dir="${jmock-exp-inheritance.output.dir}"/>
+    <delete dir="${jmock-exp-inheritance.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.jmock-exp-inheritance" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.jmock-exp-inheritance" description="build all modules"/>
+  
+  <target name="all" depends="build.modules" description="build all"/>
+
+    <taskdef name="testng" classname="org.testng.TestNGAntTask" classpath="lib/testng/testng-6.0.jar" />
+
+    <target name="tests2" description="test module" depends="build.modules">
+        <ant target="tests2" antfile="build-tests2.xml" inheritrefs="true"/>
+    </target>
+
+    <target name="all-tests" depends="tests2"/>
+</project>

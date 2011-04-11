@@ -1,0 +1,14 @@
+<project>
+    <taskdef name="testng" classname="org.testng.TestNGAntTask" classpath="lib/testng/testng-6.0.jar" />
+
+    <target name="tests2" description="test module" >
+        <mkdir dir="./test-output/${ant.project.name}"/>
+        <testng listeners="mockit.integration.testng.Initializer" outputdir="./test-output/${ant.project.name}">
+                <classpath refid="jmock-exp-inheritance.module.production.classpath"/>
+                <classpath location="${jmock-exp-inheritance.output.dir}"/>
+            <!--<classfileset dir="ionplatformdevelopment.module.test.classpath"/>-->
+            <classfileset dir="${jmock-exp-inheritance.output.dir}" includes="**/RealTest2.class"/>
+        </testng>
+    </target>
+
+</project>
